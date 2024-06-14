@@ -7,7 +7,6 @@ import pyray as ray
 
 import numpy as np
 import keras
-import tensorflow as tf
 
 
 def load_model():
@@ -105,29 +104,41 @@ def main() -> None:
                         else:
                             break
                         if x-2 >= 0:
-                            board[x-2][y] = 0.3
+                            if board[x-2][y] < 0.3:
+                                board[x-2][y] = 0.3
                         if x-1 >= 0:
-                            board[x-1][y] = 0.6
+                            if board[x-1][y] < 0.6:
+                                board[x-1][y] = 0.6
                         if x+1 < 28:
-                            board[x+1][y] = 0.6
+                            if board[x+1][y] < 0.6:
+                                board[x+1][y] = 0.6
                         if x+2 < 28:
-                            board[x+2][y] = 0.3
+                            if board[x+2][y] < 0.3:
+                                board[x+2][y] = 0.3
                         if y-2 >= 0:
-                            board[x][y-2] = 0.3
+                            if board[x][y-2] < 0.3:
+                                board[x][y-2] = 0.3
                         if y-1 >= 0:
-                            board[x][y-1] = 0.6
+                            if board[x][y-1] < 0.6:
+                                board[x][y-1] = 0.6
                         if y+1 < 28:
-                            board[x][y+1] = 0.6
+                            if board[x][y+1] < 0.6:
+                                board[x][y+1] = 0.6
                         if y+2 < 28:
-                            board[x][y+2] = 0.3
+                            if board[x][y+2] < 0.3:
+                                board[x][y+2] = 0.3
                         if x-1 >= 0 and y-1 >= 0:
-                            board[x-1][y-1] = 0.5
+                            if board[x-1][y-1] < 0.5:
+                                board[x-1][y-1] = 0.5
                         if x+1 < 28 and y-1 >= 0:
-                            board[x+1][y-1] = 0.5
+                            if board[x+1][y-1] < 0.5:
+                                board[x+1][y-1] = 0.5
                         if x-1 >= 0 and y+1 < 28:
-                            board[x-1][y+1] = 0.5
+                            if board[x-1][y+1] < 0.5:
+                                board[x-1][y+1] = 0.5
                         if x+1 < 28 and y+1 < 28:
-                            board[x+1][y+1] = 0.5
+                            if board[x+1][y+1] < 0.5:
+                                board[x+1][y+1] = 0.5
 
 
 
@@ -204,9 +215,9 @@ def main() -> None:
             res: list[list[int|float]] = [[i, v] for i, v in enumerate(temp)]
             res.sort(reverse=True, key=lambda l: l[1])
 
-            ray.draw_text(f"num: {res[0][0]}, confidence: {float(res[0][1]*100):.3}%", 200, 200, 36, black)
-            ray.draw_text(f"num: {res[1][0]}, confidence: {float(res[1][1]*100):.3}%", 200, 250, 36, black)
-            ray.draw_text(f"num: {res[2][0]}, confidence: {float(res[2][1]*100):.3}%", 200, 300, 36, black)
+            ray.draw_text(f"num: {res[0][0]}, confidence: {float(res[0][1]*100):.2f}%", 200, 200, 36, black)
+            ray.draw_text(f"num: {res[1][0]}, confidence: {float(res[1][1]*100):.2f}%", 200, 250, 36, black)
+            ray.draw_text(f"num: {res[2][0]}, confidence: {float(res[2][1]*100):.2f}%", 200, 300, 36, black)
             # print(map)
             # print(highest)
             
